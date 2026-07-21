@@ -21,15 +21,16 @@ import os
 print("=== ВСЕ ПЕРЕМЕННЫЕ ОКРУЖЕНИЯ ===")
 for key, value in os.environ.items():
     if "TOKEN" in key or "BOT" in key or "MANAGER" in key:
-        print(f"{key} = {value[:10]}...")  # показываем первые 10 символов
+        print(f"{key} = {value[:10]}...")
 print("=================================")
 
-TOKEN = os.environ.get("7649620019:AAF3R6jGRIiLFTPA9WeyQiDPnIsfpnyI-FE")
-MANAGER_CHAT_ID = int(os.getenv("8285327804", "0"))
-DB_NAME = os.getenv("DB_NAME", "appointments.db")
+# ===== ТОКЕН И ID ПРЯМО В КОДЕ =====
+TOKEN = "7649620019:AAF3R6jGRIiLFTPA9WeyQiDPnIsfpnyI-FE"
+MANAGER_CHAT_ID = 8285327804
+DB_NAME = "appointments.db"
 
-print(f"TOKEN найден: {TOKEN is not None}")  # True или False
-print(f"MANAGER_CHAT_ID: {MANAGER_CHAT_ID}")
+print(f"✅ Токен установлен: {TOKEN[:10]}... (длина: {len(TOKEN)})")
+print(f"✅ ID менеджера: {MANAGER_CHAT_ID}")
 
 MAX_REQUESTS_PER_HOUR = int(os.getenv("MAX_REQUESTS_PER_HOUR", "3"))
 MAX_REQUESTS_PER_DAY = int(os.getenv("MAX_REQUESTS_PER_DAY", "5"))
