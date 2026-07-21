@@ -14,17 +14,25 @@ from telegram.request import HTTPXRequest
 from telegram.error import BadRequest, TimedOut, NetworkError
 from telegram.ext import Application, CommandHandler, CallbackQueryHandler, MessageHandler, filters, ConversationHandler, ContextTypes
 
-load_dotenv()
+import os
 
-# --- НАСТРОЙКИ ---
-TOKEN = os.getenv ("BOT_TOKEN")
+# ОТЛАДКА: показываем все переменные
+print("=== ВСЕ ПЕРЕМЕННЫЕ ОКРУЖЕНИЯ ===")
+for key, value in os.environ.items():
+    if "TOKEN" in key or "BOT" in key or "MANAGER" in key:
+        print(f"{key} = {value[:10] if value else 'None'}...")
+print("=================================")
+
+# Ваш код
+TOKEN = os.getenv("BOT_TOKEN")
 MANAGER_CHAT_ID = int(os.getenv("MANAGER_CHAT_ID", "0"))
-DB_NAME = os.getenv ("DB_NAME", "appointments.db")
+DB_NAME = os.getenv("DB_NAME", "appointments.db")
+
+print(f"🔍 TOKEN = {TOKEN[:10] if TOKEN else 'None'}...")
+print(f"🔍 MANAGER_CHAT_ID = {MANAGER_CHAT_ID}")
 
 if not TOKEN:
     raise ValueError("❌ Токен бота не найден!")
-if not MANAGER_CHAT_ID:
-    raise ValueError("❌ ID менеджера не найден!")
 
 MAX_REQUESTS_PER_HOUR = int(os.getenv("MAX_REQUESTS_PER_HOUR", "3"))
 MAX_REQUESTS_PER_DAY = int(os.getenv("MAX_REQUESTS_PER_DAY", "5"))
