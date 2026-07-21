@@ -6,7 +6,6 @@ import os
 import datetime as dt
 from datetime import datetime, timedelta
 from collections import defaultdict
-from dotenv import load_dotenv
 import aiosqlite
 
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, InputMediaPhoto, BotCommand, WebAppInfo
@@ -14,10 +13,10 @@ from telegram.request import HTTPXRequest
 from telegram.error import BadRequest, TimedOut, NetworkError
 from telegram.ext import Application, CommandHandler, CallbackQueryHandler, MessageHandler, filters, ConversationHandler, ContextTypes
 
-load_dotenv()
 
 # --- НАСТРОЙКИ ---
-TOKEN = os.getenv("BOT_TOKEN")
+import os
+TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN")
 MANAGER_CHAT_ID = int(os.getenv("MANAGER_CHAT_ID", "0"))
 DB_NAME = os.getenv("DB_NAME", "appointments.db")
 
