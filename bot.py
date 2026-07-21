@@ -25,8 +25,8 @@ for key, value in os.environ.items():
 print("=================================")
 
 # ===== ТОКЕН И ID ПРЯМО В КОДЕ =====
-TOKEN = "7649620019:AAF3R6jGRIiLFTPA9WeyQiDPnIsfpnyI-FE"
-MANAGER_CHAT_ID = 8285327804
+TOKEN = "TELEGRAM_BOT_TOKEN"
+MANAGER_CHAT_ID = MANAGER_CHAT_ID
 DB_NAME = "appointments.db"
 
 print(f"✅ Токен установлен: {TOKEN[:10]}... (длина: {len(TOKEN)})")
