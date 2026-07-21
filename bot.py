@@ -17,9 +17,9 @@ from telegram.ext import Application, CommandHandler, CallbackQueryHandler, Mess
 load_dotenv()
 
 # --- НАСТРОЙКИ ---
-TOKEN = os.getenv "BOT_TOKEN"
+TOKEN = os.getenv ("BOT_TOKEN")
 MANAGER_CHAT_ID = int(os.getenv("MANAGER_CHAT_ID", "0"))
-DB_NAME = os.getenv "DB_NAME", "appointments.db"
+DB_NAME = os.getenv ("DB_NAME", "appointments.db")
 
 if not TOKEN:
     raise ValueError("❌ Токен бота не найден!")
