@@ -31,11 +31,6 @@ DB_NAME = os.getenv("DB_NAME", "appointments.db")
 print(f"TOKEN найден: {TOKEN is not None}")  # True или False
 print(f"MANAGER_CHAT_ID: {MANAGER_CHAT_ID}")
 
-if not TOKEN:
-    raise ValueError("❌ Токен бота не найден!")
-if not MANAGER_CHAT_ID:
-    raise ValueError("❌ ID менеджера не найден!")
-
 MAX_REQUESTS_PER_HOUR = int(os.getenv("MAX_REQUESTS_PER_HOUR", "3"))
 MAX_REQUESTS_PER_DAY = int(os.getenv("MAX_REQUESTS_PER_DAY", "5"))
 COOLDOWN_MINUTES = int(os.getenv("COOLDOWN_MINUTES", "10"))
