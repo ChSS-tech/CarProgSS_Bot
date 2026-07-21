@@ -6,30 +6,25 @@ import os
 import datetime as dt
 from datetime import datetime, timedelta
 from collections import defaultdict
+from dotenv import load_dotenv
 import aiosqlite
 
-from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, InputMediaPhoto, BotCommand, WebAppInfo
+from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, InputMediaPhoto, BotCommand
 from telegram.request import HTTPXRequest
 from telegram.error import BadRequest, TimedOut, NetworkError
 from telegram.ext import Application, CommandHandler, CallbackQueryHandler, MessageHandler, filters, ConversationHandler, ContextTypes
 
+load_dotenv()
 
 # --- НАСТРОЙКИ ---
-import os
+TOKEN = os.getenv("BOT_TOKEN")
+MANAGER_CHAT_ID = int(os.getenv("MANAGER_CHAT_ID", "0"))
+DB_NAME = os.getenv("DB_NAME", "appointments.db")
 
-# Получаем токены из переменных окружения
-TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN")
-MANAGER_CHAT_ID = int(os.environ.get("MANAGER_CHAT_ID", "0"))
-DB_NAME = os.environ.get("DB_NAME", "appointments.db")
-
-# Проверяем, что токены есть
 if not TOKEN:
-    raise ValueError("❌ Токен бота не найден! Добавьте TELEGRAM_BOT_TOKEN в переменные Railway")
+    raise ValueError("❌ Токен бота не найден!")
 if not MANAGER_CHAT_ID:
-    raise ValueError("❌ ID менеджера не найден! Добавьте MANAGER_CHAT_ID в переменные Railway")
-
-print(f"✅ Токен загружен из переменных окружения")
-print(f"✅ ID менеджера: {MANAGER_CHAT_ID}")
+    raise ValueError("❌ ID менеджера не найден!")
 
 MAX_REQUESTS_PER_HOUR = int(os.getenv("MAX_REQUESTS_PER_HOUR", "3"))
 MAX_REQUESTS_PER_DAY = int(os.getenv("MAX_REQUESTS_PER_DAY", "5"))
