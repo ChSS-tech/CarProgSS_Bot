@@ -17,19 +17,18 @@ from telegram.ext import Application, CommandHandler, CallbackQueryHandler, Mess
 # --- НАСТРОЙКИ ---
 import os
 
-# ОТЛАДКА: показываем все переменные
-print("=== ВСЕ ПЕРЕМЕННЫЕ ОКРУЖЕНИЯ ===")
-for key, value in os.environ.items():
-    if "TOKEN" in key or "BOT" in key or "MANAGER" in key:
-        print(f"{key} = {value[:10]}...")
-print("=================================")
+# Получаем токены из переменных окружения
+TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN")
+MANAGER_CHAT_ID = int(os.environ.get("MANAGER_CHAT_ID", "0"))
+DB_NAME = os.environ.get("DB_NAME", "appointments.db")
 
-# ===== ТОКЕН И ID ПРЯМО В КОДЕ =====
-TOKEN = "TELEGRAM_BOT_TOKEN"
-MANAGER_CHAT_ID = MANAGER_CHAT_ID
-DB_NAME = "appointments.db"
+# Проверяем, что токены есть
+if not TOKEN:
+    raise ValueError("❌ Токен бота не найден! Добавьте TELEGRAM_BOT_TOKEN в переменные Railway")
+if not MANAGER_CHAT_ID:
+    raise ValueError("❌ ID менеджера не найден! Добавьте MANAGER_CHAT_ID в переменные Railway")
 
-print(f"✅ Токен установлен: {TOKEN[:10]}... (длина: {len(TOKEN)})")
+print(f"✅ Токен загружен из переменных окружения")
 print(f"✅ ID менеджера: {MANAGER_CHAT_ID}")
 
 MAX_REQUESTS_PER_HOUR = int(os.getenv("MAX_REQUESTS_PER_HOUR", "3"))
