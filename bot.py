@@ -24,8 +24,8 @@ for key, value in os.environ.items():
         print(f"{key} = {value[:10]}...")  # показываем первые 10 символов
 print("=================================")
 
-TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN")
-MANAGER_CHAT_ID = int(os.getenv("MANAGER_CHAT_ID", "0"))
+TOKEN = os.environ.get("7649620019:AAF3R6jGRIiLFTPA9WeyQiDPnIsfpnyI-FE")
+MANAGER_CHAT_ID = int(os.getenv("8285327804", "0"))
 DB_NAME = os.getenv("DB_NAME", "appointments.db")
 
 print(f"TOKEN найден: {TOKEN is not None}")  # True или False
